@@ -7,3 +7,6 @@ Find two correlation,
 
 ##### Result
 Correlation between totalCriminalCount and movieCount is: -0.8009708446869702
+
+## Exercise two: Analyzing Twitter
+https://netlytic.org/
