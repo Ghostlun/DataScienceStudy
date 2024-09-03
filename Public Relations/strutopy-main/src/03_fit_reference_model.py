@@ -37,6 +37,7 @@ np.random.seed(SEED)
 
 
 # %%
+import pandas as pd
 def fit_reference_model(K):
     output_dir = f"{ARTIFACTS_ROOT_DIR}/reference_model/{K}"
 
@@ -88,7 +89,10 @@ def fit_reference_model(K):
         json.dump(stm_config, f)
 
 
+
+
 # %% parallization
+from modules.chunk_it import chunkIt
 
 # topics
 # failed for k = 90
@@ -98,8 +102,6 @@ cores_to_use = 8
 t_split = chunkIt(t, float(len(t) / cores_to_use))
 
 # %%
-
 for ll in range(len(t_split)):
     with Parallel(n_jobs=len(t_split[ll]), verbose=51) as parallel:
         parallel(delayed(fit_reference_model)(K=k) for k in t_split[ll])
-# %%
