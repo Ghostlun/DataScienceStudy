@@ -1,4 +1,3 @@
-# %%
 import json
 import logging
 import os
@@ -10,7 +9,7 @@ from joblib import Parallel, delayed
 
 from modules.chunk_it import chunkIt
 from modules.stm import STM
-
+# %%
 logging.basicConfig(
     format="%(asctime)s %(message)s",
     datefmt="%m/%d/%Y %I:%M:%S %p",
@@ -19,7 +18,6 @@ logging.basicConfig(
     level=logging.INFO,
 )
 
-# %% specify root directory
 ARTIFACTS_ROOT_DIR = "artifacts"
 
 # load reference corpus & corresponding dictionary
@@ -39,6 +37,7 @@ np.random.seed(SEED)
 # %%
 import pandas as pd
 def fit_reference_model(K):
+    print(K)
     output_dir = f"{ARTIFACTS_ROOT_DIR}/reference_model/{K}"
 
     try:

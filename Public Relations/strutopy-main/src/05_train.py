@@ -146,17 +146,17 @@ k_gamma = [
     #'K_50_gamma_factor_3',
     #'K_10_gamma_factor_0',
     "K_70_gamma_factor_1",
-    "K_30_gamma_factor_1",
+    # "K_30_gamma_factor_1",
     "K_50_gamma_factor_1",
-    "K_10_gamma_factor_1",
+    # "K_10_gamma_factor_1",
     "K_70_gamma_factor_5",
-    "K_30_gamma_factor_5",
+    # "K_30_gamma_factor_5",
     "K_50_gamma_factor_5",
-    "K_10_gamma_factor_5",
+    # "K_10_gamma_factor_5",
     "K_70_gamma_factor_10",
-    "K_30_gamma_factor_10",
+    # "K_30_gamma_factor_10",
     "K_50_gamma_factor_10",
-    "K_10_gamma_factor_10",
+    # "K_10_gamma_factor_10",
 ]
 
 list_input = pd.DataFrame(
