@@ -19,18 +19,29 @@ import os
 import os
 import re
 
+logfile_path = "artifacts/logfiles/application.log"
 
-# initialize logging
+# Create the directory if it doesn't exist
+log_dir = os.path.dirname(logfile_path)
+if not os.path.exists(log_dir):
+    os.makedirs(log_dir)
+
+# Create the file if it doesn't exist
+if not os.path.exists(logfile_path):
+    with open(logfile_path, 'w') as f:
+        pass  # Just create the file
+
+# Initialize logging
 logging.basicConfig(
     format="%(asctime)s %(message)s",
     datefmt="%m/%d/%Y %I:%M:%S %p",
-    filename="artifacts/logfiles/application.log",
+    filename=logfile_path,
     encoding="utf-8",
     level=logging.INFO,
 )
+
 logger = multiprocessing.log_to_stderr()
 logger.setLevel(logging.INFO)
-
 #%% define function for hyperparameter tuning 
 def train_on_corpus(K, beta_train_corpus, theta_train_corpus, heldout_corpus):
     """
@@ -121,7 +132,7 @@ text_corpus = [re.sub(r"[^\w\s]", "", doc) for doc in text_corpus]
 text_corpus = ["".join([i for i in doc if not i.isdigit()]) for doc in text_corpus]
 
 # Create a set of pre-defined stop words
-with open(stop_words_path) as f:
+with open(stop_words_path, encoding="utf-8") as f:
     stoplist = f.read().split()
 
 # add words to stoplist
@@ -148,6 +159,7 @@ data["text_preproc"] = texts
 
 dictionary = corpora.Dictionary()
 BoW_corpus = [dictionary.doc2bow(doc, allow_update=True) for doc in texts]
+print(BoW_corpus)
 #%% Prepare corpora for finding the optimal number of topics
 
 # specify model parameters
@@ -157,7 +169,7 @@ max_em_iter = 20
 sigma_prior = 0
 convergence_threshold = 1e-5
 
-# set topical prevalence 
+# set topical prevalence
 prevalence_covariate = ['statistics', 'ml']
 X = data.loc[:, prevalence_covariate]
 
@@ -171,15 +183,29 @@ train_docs = corpus[:test_split_idx]
 test_docs = corpus[test_split_idx:]
 test_1_docs, test_2_docs = cut_in_half(test_docs)
 
+# Issue Can't find
 # Prepare corpora for model training
-beta_train_corpus = np.concatenate([
-    train_docs,
-    test_docs,
-])
-theta_train_corpus = np.concatenate([
-    train_docs,
-    test_1_docs,
-])
+
+print(f"Number of documents in train_docs: {len(train_docs)}")
+print(f"Number of documents in test_docs: {len(test_docs)}")
+print(f"Number of documents in test_1_docs: {len(test_1_docs)}")
+print(f"Number of documents in test_2_docs: {len(test_2_docs)}")
+
+print("\nSize of documents (number of tokens):")
+print(f"First document in train_docs has {len(train_docs[0])} tokens")
+print(f"First document in test_docs has {len(test_docs[0])} tokens")
+print(f"First document in test_1_docs has {len(test_1_docs[0])} tokens")
+print(f"First document in test_2_docs has {len(test_2_docs[0])} tokens")
+
+print(type(train_docs))
+print(type(test_docs))
+print(type(train_docs))
+print(type(test_1_docs))
+
+beta_train_corpus = train_docs + test_docs
+if isinstance(test_1_docs, np.ndarray):
+    test_1_docs = test_1_docs.tolist()
+theta_train_corpus = train_docs + test_1_docs
 heldout_corpus = test_2_docs
  
 # %% Fit the model for K candidates and save the results

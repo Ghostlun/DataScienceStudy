@@ -7,6 +7,7 @@ import numpy as np
 import pandas as pd
 from gensim import corpora
 from gensim.parsing.preprocessing import STOPWORDS
+# 이 Python 스크립트는 텍스트 데이터를 전처리하고, 전처리된 데이터를 이용해 Bag of Words (BoW) 모델을 생성하는 과정을 보여줍니다. 이 과정은 자연어 처리(NLP)에서 주로 사용됩니다. 각 부분을 설명하겠습니다:
 
 artifacts_dir = "artifacts/wiki_data"
 
