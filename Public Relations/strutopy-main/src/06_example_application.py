@@ -292,7 +292,7 @@ stm_config = {
         "lda_beta": True,
         "sigma_prior": sigma_prior,
         "convergence_threshold": convergence_threshold,
-        "init_type": "spectral",
+        "init_type": "spectral", 
     }
 wiki_model = STM(
     documents=BoW_corpus,

@@ -6,5 +6,11 @@ import pandas as pd
 # 결과적으로 6,443,910개의 형태소를 사용하여 주제 모델링을 수행했습니다.
 #  토픽 모델링이란 기계 학습 및 자연어 처리 분야에서, 토픽 모델링 이란 기계 학 습 및 자연어 처리 분야에서 토픽이라는 문서 집합의 추상적인 주제를 발견
 # 
-df = pd.read_excel("STOPS_330_081924.xls")
-print(df)
+df = pd.read_csv("dataFile.csv")
+# print(df)
+
+# print(df.columns)
+
+target_df = df['Abstract']
+print(target_df)
+

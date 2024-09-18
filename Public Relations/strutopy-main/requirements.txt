@@ -2,7 +2,7 @@ pandas
 wikipedia
 gensim
 joblib
-sklearn
+scikit-learn
 qpsolvers
 matplotlib
 wordcloud
