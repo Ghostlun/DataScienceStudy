@@ -1,3 +1,4 @@
+# %%
 import pandas as pd
 import os
 
@@ -15,7 +16,7 @@ df['paper_text_processed'] = df['Abstract'].map(lambda x: re.sub(r'[,\.!?]', '',
 df['paper_text_processed'] = df['paper_text_processed'].map(lambda x: x.lower() if isinstance(x, str) else x)
 df['paper_text_processed'] = df['paper_text_processed'].astype(str)
 print(df['paper_text_processed'].head())
-
+# %%
 # Exploratory Analysis
 from wordcloud import WordCloud
 
@@ -51,7 +52,7 @@ data_words = list(sent_to_wrods(data))
 data_words = remove_stopwords(data_words)
 print(data_words[:1][0][:30])
 
-
+# %%
 import gensim.corpora as corpora
 # Create Dictionary
 id2word = corpora.Dictionary(data_words)
@@ -62,7 +63,7 @@ corpus = [id2word.doc2bow(text) for text in texts]
 # View
 print(corpus[:1][0][:30])
 
-
+# %%
 from pprint import pprint
 # number of topics
 num_topics = 10
